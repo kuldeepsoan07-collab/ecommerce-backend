@@ -3,7 +3,10 @@ import morgan from "morgan";
 import authRouter from "./routes/auth.routes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
+import productRouter from "./routes/product.routes.js";
+import paymentRouter from "./routes/payment.routes.js";
+import orderRouter from "./routes/order.routes.js";
+import uploadRouter from "./routes/upload.routes.js";
 const app = express();
 
 app.use(
@@ -21,6 +24,9 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
-
+app.use("/api/products", productRouter);
+app.use("/api/payment", paymentRouter);
+app.use("/api/orders", orderRouter);
+app.use("/api/upload", uploadRouter);
 
 export default app;
