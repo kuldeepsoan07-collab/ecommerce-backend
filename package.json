@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon server.js",
+    "start": "node server.js",
     "seed:products": "node src/seed/products.seed.js"
   },
   "keywords": [],
@@ -20,7 +21,7 @@
     "express": "^5.2.1",
     "googleapis": "^176.0.0",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.9.2",
+    "mongoose": "^9.10.3",
     "morgan": "^1.11.0",
     "multer": "^2.3.0",
     "nodemailer": "^9.0.5",
