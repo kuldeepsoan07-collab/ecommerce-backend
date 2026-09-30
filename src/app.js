@@ -7,14 +7,28 @@ import productRouter from "./routes/product.routes.js";
 import paymentRouter from "./routes/payment.routes.js";
 import orderRouter from "./routes/order.routes.js";
 import uploadRouter from "./routes/upload.routes.js";
+
 const app = express();
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://ecommerce-frontend-9ryvmxj0n-kul8.vercel.app",
-    ],
+    origin: (origin, callback) => {
+      // Postman/server-to-server requests
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
@@ -28,5 +42,12 @@ app.use("/api/products", productRouter);
 app.use("/api/payment", paymentRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/upload", uploadRouter);
+
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Ecommerce API is running",
+  });
+});
 
 export default app;
